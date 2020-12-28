@@ -8,6 +8,7 @@ public class RocketController : MonoBehaviour
     [SerializeField] private float force = 10f;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private Text inGameVelocityText;
     [SerializeField] private Text winVelocityText;
     [SerializeField] private Text loseVelocityText;
     private Vector2 inputMovement;
@@ -27,6 +28,8 @@ public class RocketController : MonoBehaviour
         float torque = Input.GetAxisRaw("Horizontal");
 
         inputMovement = new Vector2(torque, upMovement);
+
+        inGameVelocityText.text = "Velocity: " + currentVel.ToString("F") + "[m/s]";
     }
 
     // Update is called once per frame
@@ -46,12 +49,12 @@ public class RocketController : MonoBehaviour
             {
                 //successful landing, display win screen
                 winPanel.gameObject.SetActive(true);
-                winVelocityText.text = "Your velocity was: " + currentVel + "[m/s]";
+                winVelocityText.text = "Your velocity was: " + currentVel.ToString("F") + "[m/s]";
             }
             else
             {
                 losePanel.gameObject.SetActive(true);
-                loseVelocityText.text = "Your velocity was: " + currentVel + "[m/s]";
+                loseVelocityText.text = "Your velocity was: " + currentVel.ToString("F") + "[m/s]";
             }
 
             Time.timeScale = 0;
